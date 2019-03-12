@@ -1,0 +1,1 @@
+json.partial! "conversations.json.jbuilder", conversations: @conversations
