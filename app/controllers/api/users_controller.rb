@@ -11,7 +11,7 @@ class Api::UsersController < ApplicationController
       address: params[:address],
       bio: params[:bio],
       avatar: params[:avatar],
-      # id: current_user.id
+      id: current_user.id
      )
 
     if @user.save
@@ -23,7 +23,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params["id"])
+    @user = current_user
     render 'show.json.jbuilder'
   end
 
