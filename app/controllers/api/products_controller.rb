@@ -2,14 +2,18 @@ class Api::ProductsController < ApplicationController
 
   before_action :authenticate_user
 
+  # def index
+  #   @products = current_user.products
+  #   render 'index.json.jbuilder'
+  # end
+
   def create
     @product = Product.new(
       name: params[:name],
       category_id: params[:category_id],
       description: params[:description],
       price: params[:price],
-      qoh: params[:qoh],
-      user_id: current_user.id
+      qoh: params[:qoh]
     )
 
     if @product.save
@@ -20,7 +24,7 @@ class Api::ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params["id"])
+    @product = Product.find(params[:id])
     render 'show.json.jbuilder'
   end
 
@@ -28,8 +32,7 @@ class Api::ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     @product.name = params[:name] || @product.name
-    @product.description = params[:description] ||
-     @product.description
+    @product.description = params[:description] || @product.description
     @product.price = params[:price] || @product.price
     @product.qoh = params[:qoh] || @product.qoh
 

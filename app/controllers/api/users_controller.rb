@@ -1,6 +1,15 @@
+    
 class Api::UsersController < ApplicationController
 # 
   before_action :authenticate_user, only: [:update, :destroy]
+  
+  def show
+    if current_user
+    @user = current_user
+    @user.id = current_user.id
+    end
+    render 'show.json.jbuilder'
+  end
 
   def create
     @user = User.new(
@@ -10,21 +19,14 @@ class Api::UsersController < ApplicationController
       password_confirmation: params[:password_confirmation],
       address: params[:address],
       bio: params[:bio],
-      avatar: params[:avatar],
-      id: current_user.id
+      avatar: params[:avatar]
      )
 
     if @user.save
       render 'show.json.jbuilder'
-
     else
       render json: {errors: @user.errors.full_messages}, status: :bad_request
     end
-  end
-
-  def show
-    @user = current_user
-    render 'show.json.jbuilder'
   end
 
   def update
