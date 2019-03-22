@@ -13,7 +13,8 @@ class Api::ProductsController < ApplicationController
       category_id: params[:category_id],
       description: params[:description],
       price: params[:price],
-      qoh: params[:qoh]
+      qoh: params[:qoh],
+      user_id: current_user.id
     )
 
     if @product.save
@@ -35,6 +36,7 @@ class Api::ProductsController < ApplicationController
     @product.description = params[:description] || @product.description
     @product.price = params[:price] || @product.price
     @product.qoh = params[:qoh] || @product.qoh
+    @product.user_id = params[:user_id] || @product.user_id
 
     @product.save
     render 'show.json.jbuilder'
