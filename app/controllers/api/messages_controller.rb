@@ -10,8 +10,9 @@ class Api::MessagesController < ApplicationController
 
   def create
     @message = Message.new(
-      subject: params[:subject],
       body: params[:message]
+      user_id: current_user.id,
+      conversation_id: params[:conversation_id]
       )
 
     if @message.save
@@ -22,10 +23,10 @@ class Api::MessagesController < ApplicationController
     end
   end
 
-  def show
-    @message = Message.find(params[:id])
-    render 'show.json.jbuilder'
-  end
+  # def show
+  #   @message = Message.find(params[:id])
+  #   render 'show.json.jbuilder'
+  # end
 
 
   # def destroy

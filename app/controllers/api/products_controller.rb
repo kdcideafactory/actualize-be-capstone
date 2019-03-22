@@ -18,6 +18,10 @@ class Api::ProductsController < ApplicationController
     )
 
     if @product.save
+      @image = Image.new(
+        product_id: @product.id,
+        url: params[:url]
+        )
       render 'show.json.jbuilder'
     else
       render json: {errors: @product.errors.full_messages}, status: :bad_request
