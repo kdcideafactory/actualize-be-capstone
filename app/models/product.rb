@@ -1,10 +1,9 @@
 class Product < ApplicationRecord
 
-belongs_to :user
-belongs_to :category
+  belongs_to :user
+  belongs_to :category
 
-has_many :images
-has_many :conversations
+  has_many :images
 
 
 # def images

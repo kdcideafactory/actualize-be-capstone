@@ -5,4 +5,5 @@ json.description product.description
 json.price product.price
 json.qoh product.qoh
 json.user_id product.user_id
+json.url image.product.id.url
 json.user_name product.user.name

@@ -14,22 +14,28 @@ class Api::ProductsController < ApplicationController
       description: params[:description],
       price: params[:price],
       qoh: params[:qoh],
-      user_id: current_user.id
+      user_id: current_user
     )
 
     if @product.save
       @image = Image.new(
+        url: params[:url],
         product_id: @product.id,
-        url: params[:url]
+        user_id: current_user
         )
       render 'show.json.jbuilder'
     else
       render json: {errors: @product.errors.full_messages}, status: :bad_request
     end
+      if @image.save
+        render json: {errors: @product.errors.full_messages}, status: :bad_request
+      end
   end
 
   def show
-    @product = Product.find(params[:id])
+    @user = current_user
+    @user.id = current_user.id
+    @product.id = current_product.id
     render 'show.json.jbuilder'
   end
 
@@ -42,8 +48,11 @@ class Api::ProductsController < ApplicationController
     @product.qoh = params[:qoh] || @product.qoh
     @product.user_id = params[:user_id] || @product.user_id
 
-    @product.save
-    render 'show.json.jbuilder'
+    if @product.save
+      render 'show.json.jbuilder'
+    else
+      render json: {errors: @product.errors.full_messages}, status: :bad_request
+    end
   end
 
   def destroy
@@ -51,6 +60,4 @@ class Api::ProductsController < ApplicationController
     @product.destroy
     render json: {message: "This shit was burned with fire"}
   end
-
-
 end
