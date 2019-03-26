@@ -8,7 +8,6 @@ class Api::ImagesController < ApplicationController
     )
 
     if @image.save
-      product_id: current_product.id
       render 'show.json.jbuilder'
     else
       render json: {errors: @image.errors.full_messages}, status: :bad_request

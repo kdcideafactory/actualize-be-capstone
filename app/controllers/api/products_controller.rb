@@ -20,16 +20,12 @@ class Api::ProductsController < ApplicationController
     if @product.save
       @image = Image.new(
         url: params[:url],
-        product_id: @product.id,
-        user_id: current_user
+        product_id: @product.id
         )
       render 'show.json.jbuilder'
     else
       render json: {errors: @product.errors.full_messages}, status: :bad_request
     end
-      if @image.save
-        render json: {errors: @product.errors.full_messages}, status: :bad_request
-      end
   end
 
   def show
