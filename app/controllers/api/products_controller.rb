@@ -2,10 +2,10 @@ class Api::ProductsController < ApplicationController
 
   before_action :authenticate_user
 
-  # def index
-  #   @products = current_user.products
-  #   render 'index.json.jbuilder'
-  # end
+  def index
+    @products = current_user.products
+    render 'index.json.jbuilder'
+  end
 
   def create
     @product = Product.new(

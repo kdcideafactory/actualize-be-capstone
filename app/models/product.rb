@@ -5,9 +5,4 @@ class Product < ApplicationRecord
 
   has_many :images
 
-
-# def images
-#   Images.where(product_id: id)
-# end
-
 end

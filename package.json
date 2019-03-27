@@ -2,6 +2,7 @@
   "name": "end_of_world_capstone_app",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "cors": "^2.8.5"
   }
 }
