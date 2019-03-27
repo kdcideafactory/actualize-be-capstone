@@ -1,7 +1,7 @@
 class Api::ConversationsController < ApplicationController
 
   def index
-    @conversations = current_user_id.conversations
+    @conversations = current_user.conversations
   end
 
   def show
