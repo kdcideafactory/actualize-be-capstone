@@ -1,1 +1,1 @@
-json.partial! "messages.json.jbuilder", messages: @messages
+json.partial! "message.json.jbuilder", message: @message

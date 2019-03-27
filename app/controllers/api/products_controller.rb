@@ -1,6 +1,6 @@
 class Api::ProductsController < ApplicationController
 
-  before_action :authenticate_user
+  # before_action :authenticate_user
 
   def index
     @products = current_user.products
@@ -14,7 +14,7 @@ class Api::ProductsController < ApplicationController
       description: params[:description],
       price: params[:price],
       qoh: params[:qoh],
-      user_id: current_user
+      user_id: params[:user_id]
     )
 
     if @product.save
@@ -22,6 +22,7 @@ class Api::ProductsController < ApplicationController
         url: params[:url],
         product_id: @product.id
         )
+      @image.save
       render 'show.json.jbuilder'
     else
       render json: {errors: @product.errors.full_messages}, status: :bad_request

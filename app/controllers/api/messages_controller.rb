@@ -14,10 +14,10 @@ class Api::MessagesController < ApplicationController
 
   def create
 
-     @message = Message.new(
-    user_id:, current_user.id,
-    subject: params["subject"], ###THIS SHOULD BE THE PRODUCT - NEED TO TIE THIS TO THE PRODUCT
-
+   @message = Message.new(
+    body: params[:body],
+    conversation_id: params[:conversation_id],
+    user_id: current_user.id
     )
    if @message.save
     render 'show.json.jbuilder'
